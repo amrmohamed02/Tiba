@@ -1,4 +1,9 @@
-﻿<!doctype html>
+﻿<?php 
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Dosing;
+?>
+<!doctype html>
 <html class="no-js" lang="en">
     <head>
         <title>tipa </title>
@@ -193,44 +198,25 @@
                             <!-- work grid -->
                             <ul class="grid masonry-items">
                                 <!-- work item ( external page ) -->
-                                <li class="html jquery wordpress">
-                                    <figure>
-                                        <div class="gallery-img"><a href="#"><img src="images/768x538.png" alt=""></a></div>
-                                        <figcaption>
-                                         
-                                            <h3 class="titelbox"><a href="#">High Performing Solutions
-</a></h3>
-                                            <p class="textbox">Are you looking for Nutrition combined with Biostimulation?
+                                @foreach ($categories as $category)
+                                    <li class="html jquery wordpress">
+                                        <figure>
+                                            <div class="gallery-img"><a href="/{{$category->name}}"><img src="CatImg/{{$category->pic}}" alt=""></a></div>
+                                            <figcaption>
+                                
+                                                <h3 class="titelbox"><a href="/{{$category->name}}">{{$category->name}}</a></h3>
+                                                <p class="textbox">{{$category->description}}</p>
+                                                <a class="text-small highlight-link text-uppercase bg-black white-text" href="/{{$category->name}}"> Go to {{$category->name}} <i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
 
-High Performing Solutions is a range of innovative fertilizers combining Nutrition with Biostimulation. This range provides the grower with solutions for better Nutrient Use Efficiency (NUE), improved Abiotic Stress Tolerance and greater Crop Quality.</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text" href="#"> Go to High Performing Solutions <i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
-
-                                        </figcaption>
-                                    </figure>
-                                </li>
+                                            </figcaption>
+                                        </figure>
+                                    </li> 
+                                @endforeach
                                 <!-- end work item -->
-                                <!-- work item ( lightbox gallery ) -->
-                                <li class="html magento wordpress lightbox-gallery">
-                                    <figure>
-                                        <div class="gallery-img"><a href="images/768x538.png" title=""><img src="images/768x538.png" alt=""></a><a href="images/768x538.png" title=""></a><a href="images/768x538.png" title=""></a></div>
-                                        <figcaption>
-                                           
-                                            <h3 class="titelbox"><a href="images/768x538.png" title="">Essentials
-</a></h3>
-                                            <p class="textbox">Are you looking for Nutrition?
-
-Essentials is a range of fundamental purely mineral water soluble and liquid fertilizers. This range provides the grower with all the essential nutrients to feed their plants.</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text" href="#">Go to Essentials <i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <!-- end work item -->
-
                             </ul>
                             <!-- end work grid -->
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -238,12 +224,12 @@ Essentials is a range of fundamental purely mineral water soluble and liquid fer
         <!-- end content section -->
 
         <!-- main project images -->
+        @foreach ($categories as $category)
         <section id="packages" class="work-4col gutter work-with-title wide wide-title no-margin-top content-section no-padding-bottom xs-onepage-section">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12 text-center no-padding margin-five no-margin-top sm-margin-bottom-ten">
-                        <h1>High Performing Solutions
-</h1>
+                        <h1> {{$category->name}}</h1>
                     </div>
                 </div>
                 <div class="row">
@@ -253,130 +239,23 @@ Essentials is a range of fundamental purely mineral water soluble and liquid fer
                             <!-- tour grid -->
                             <ul class="grid masonry-items" style="position: relative; height: 840px;">
                                 <!-- tour item -->
+                                @foreach ($category->products as $p)
                                 <li class="holidays luxury safari" style="position: absolute; left: 0px; top: 0px;">
                                     <figure>
-                                        <div class="gallery-img"><a href="#"><img src="images/travel-agency-packages08.jpg" alt=""></a></div>
+                                        <div class="gallery-img"><a href="#"><img src="/storage/ProductImg/{{$p->pic}}" alt=""></a></div>
                                         <figcaption>
-                                            <h3><a href="#">Algae Solutions</a></h3>
-
-                                            <p>Van Iperen offers a full range of seaweed based products Where Nutrition meets Biostimulation™
-
-</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex2" href="services.html">Algae Solutions<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
+                                            <h3><a href="#">{{$p->name}}</a></h3>
+                                            <p>{{$p->description}}</p>
+                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex2" href="services.html">{{$p->name}}<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
+                                @endforeach
                                 <!-- end tour item -->
-                                <!-- tour item -->
-                                <li class="holidays luxury" style="position: absolute; left: 342px; top: 0px;">
-                                    <figure>
-                                        <div class="gallery-img"><a href="#"><img src="images/travel-agency-packages01.jpg" alt=""></a></div>
-                                        <figcaption>
-                                            <h3><a href="#">Bangkok Pattaya</a></h3>
-                                            <p>Van Iperen offers a full range of chelated and non-chelated Micronutrients in solid and liquid form
-
-
-
-</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex3" href="services.html">Algae Solutions<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <!-- end tour item -->
-                                <!-- tour item -->
-                                <li class="honeymoon family safari luxury" style="position: absolute; left: 684px; top: 0px;">
-                                    <figure>
-                                        <div class="gallery-img"><a href="#"><img src="images/travel-agency-packages04.jpg" alt=""></a></div>
-                                        <figcaption>
-                                            <h3><a href="#">Thailand Special</a></h3>
-                                            <p>Van Iperen offers a full range of chelated and non-chelated Micronutrients in solid and liquid form
-
-</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex4" href="services.html">Algae Solutions<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <!-- end tour item -->
-                                <!-- tour item -->
-                                <li class="holidays honeymoon luxury" style="position: absolute; left: 1026px; top: 0px;">
-                                    <figure>
-                                        <div class="gallery-img"><a href="#"><img src="images/travel-agency-packages05.jpg" alt=""></a></div>
-                                        <figcaption>
-                                            <h3><a href="#">Australian Getaway</a></h3>
-                                            <p>Van Iperen offers a full range of chelated and non-chelated Micronutrients in solid and liquid form
-
-</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex5" href="services.html">Algae Solutions<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <!-- end tour item -->
-                                <!-- tour item -->
-                                <li class="Safari honeymoon family safari" style="position: absolute; left: 0px; top: 420px;">
-                                    <figure>
-                                        <div class="gallery-img"><a href="#"><img src="images/travel-agency-packages07.jpg" alt=""></a></div>
-                                        <figcaption>
-                                            <h3><a href="#">Switzerland Winter</a></h3>
-                                            <p>Van Iperen offers a full range of chelated and non-chelated Micronutrients in solid and liquid form
-
-</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex6" href="services.html">Algae Solutions<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <!-- end tour item -->
-                                <!-- tour item -->
-                                <li class="Safari holidays family" style="position: absolute; left: 342px; top: 420px;">
-                                    <figure>
-                                        <div class="gallery-img"><a href="#"><img src="images/travel-agency-packages09.jpg" alt=""></a></div>
-                                        <figcaption>
-                                            <h3><a href="#">Singapore City</a></h3>
-                                            <p>Van Iperen offers a full range of chelated and non-chelated Micronutrients in solid and liquid form
-
-</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex7" href="services.html">Algae Solutions<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <!-- end tour item -->
-                                <!-- tour item -->
-                                <li class="Safari honeymoon family safari" style="position: absolute; left: 684px; top: 420px;">
-                                    <figure>
-                                        <div class="gallery-img"><a href="#"><img src="images/travel-agency-packages06.jpg" alt=""></a></div>
-                                        <figcaption>
-                                            <h3><a href="#">Principe Forte Dei Marmi</a></h3>
-                                            <p>Van Iperen offers a full range of chelated and non-chelated Micronutrients in solid and liquid form
-
-</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex8" href="services.html">Algae Solutions<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <!-- end tour item -->
-                                <!-- tour item -->
-                                <li class="Safari honeymoon family" style="position: absolute; left: 1026px; top: 420px;">
-                                    <figure>
-                                        <div class="gallery-img"><a href="#"><img src="images/travel-agency-packages10.jpg" alt=""></a></div>
-                                        <figcaption>
-                                            <h3><a href="#">South Africa Adventures</a></h3>
-                                            <p>Van Iperen offers a full range of chelated and non-chelated Micronutrients in solid and liquid form
-
-</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex1" href="services.html">Algae Solutions<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
-                                        </figcaption>
-                                    </figure>
-                                </li>
-                                <!-- end tour item -->
-                            </ul>
-                            <!-- end tour grid -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- end main project images -->
 
         <section class="wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
+        @endforeach
+        <br><br><br><br><br>
             <div class="container">
                 <div class="row">
                     <div class="col-md-7 col-sm-10 center-col text-center margin-ten no-margin-top">
