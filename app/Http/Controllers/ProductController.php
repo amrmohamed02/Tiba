@@ -4,25 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     public function add(Request $request)
     {
+        if(!session('userid')){
+            return redirect('/admin/login');
+        }
         if($request->isMethod('post')){
             $extension = $request->file('pic')->extension();
-            if($extension==='png'||$extension==='jpeg'){
+            if($extension==='png'||$extension==='jpeg'||$extension==='bmp'){
                 $product=new Product();
                 $product->name=$request->input('name');
                 $product->category_id=$request->input('category');
+                $product->supplier_id=$request->input('supplier');
                 $product->description=$request->input('description');
                 $product->pic=$request->file('pic')->getClientOriginalName();
-                // $product->availability = if ($product->quantity||$request->input('quantity') != 0)
-                //                             return true ;
-                //                          else
-                //                             return false;
                 $product->quantity=$request->input('quantity');
                 $product->save();
                 $product->pic=$product->id.random_int(0,100).$request->file('pic')->getClientOriginalName();
@@ -38,49 +40,30 @@ class ProductController extends Controller
 
         else{
             $categories=Category::all();
-            return view('dashboard/add-product',['categories'=>$categories]);
-        }
+            $suppliers=Supplier::all();
 
-    }
-
-    public function addcat(Request $request)
-    {
-        $extension = $request->file('pic')->extension();
-        if($extension==='png'||$extension==='jpeg'){
-            echo $extension;
-            $category=new Category();
-            $category->name=$request->input('name');
-            $category->description=$request->input('description');
-            $category->pic=$request->file('pic')->getClientOriginalName();
-            $category->save();
-            $category->pic=$category->id.random_int(0,100).$request->file('pic')->getClientOriginalName();
-            $request->file('pic')->storeAs('public/CategoryImg',$category->pic);
-            $category->save();
-            return redirect('/admin/add');
-        }
-        else{
-            
-            return "<script> alert('wrong file extension->$extension')</script>".redirect('/admin/add');
+            return view('dashboard/add-product',['categories'=>$categories,'suppliers'=>$suppliers]);
         }
 
     }
     
     public function show()
     {
-        $products=Product::all();
         $categories=Category::all();
-        return view('productlist',['products'=>$products],['categories'=>$categories]);
+        return view('productlist',['categories'=>$categories]);
     }
     
-    public function categorydel($id) 
+    public function productdetails($name)
     {
-            $cat = Category::find($id);
-            $cat->forceDelete();
-            return redirect('/admin/products');
+        $product = Product::where('name',$name)->first();
+        return view('productdetails',['product'=>$product]);
     }
 
     public function productdel($id)
     {
+        if(!session('userid')){
+            return redirect('/admin/login');
+        }
         $Product = Product::find($id);
         Storage::delete('public/ProductImg/'.$Product->image);
         $Product->forceDelete();
@@ -88,11 +71,15 @@ class ProductController extends Controller
 
     }
     
-    public function bycat(Request $request,$cat)
+    public function bycat(Request $request)
     {
-        $products=Product::where('category',$cat)->get();
-        $categories=Category::all();
-        return view('product_list',['products'=>$products],['categories'=>$categories]);
+        if($request->isMethod('post')){
+            foreach($request->ids as $id){
+                $categories [] =  Category::where('id',$id)->first();
+            }
+            return view('productlist',['categories'=>$categories]);
+        }
+        
     }
     // public function delet(Request $request)
     // {

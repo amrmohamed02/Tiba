@@ -110,7 +110,7 @@ use App\Models\Dosing;
                                 <!-- end menu item -->
                                 <!-- menu item -->
                                 <li class="dropdown panel">
-                                    <a href="#" class="dropdown-toggle collapsed" data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">PRODUCTS <i class="fa fa-angle-down"></i></a>
+                                    <a href="/products"  data-toggle="collapse" data-parent="#accordion" data-hover="dropdown">PRODUCTS <i class="fa fa-angle-down"></i></a>
                                     <!-- sub menu -->
                                     
                                     <!-- end sub menu -->
@@ -201,7 +201,7 @@ use App\Models\Dosing;
                                 @foreach ($categories as $category)
                                     <li class="html jquery wordpress">
                                         <figure>
-                                            <div class="gallery-img"><a href="/{{$category->name}}"><img src="CatImg/{{$category->pic}}" alt=""></a></div>
+                                            <div class="gallery-img"><a href="/{{$category->name}}"><img src="/storage/CategoryImg/{{$category->pic}}" alt=""></a></div>
                                             <figcaption>
                                 
                                                 <h3 class="titelbox"><a href="/{{$category->name}}">{{$category->name}}</a></h3>
@@ -232,27 +232,37 @@ use App\Models\Dosing;
                         <h1> {{$category->name}}</h1>
                     </div>
                 </div>
-                <div class="row">
+                
                   
+                <div class="row">
                     <div class="col-md-12 grid-gallery overflow-hidden no-padding">
-                        <div class="tab-content">
-                            <!-- tour grid -->
-                            <ul class="grid masonry-items" style="position: relative; height: 840px;">
-                                <!-- tour item -->
                                 @foreach ($category->products as $p)
+                                
+                                    <div class="tab-content">
+                                        <!-- tour grid -->
+                                        <ul class="grid masonry-items" style="position: relative; height: 840px;">
+                                            <!-- tour item -->
                                 <li class="holidays luxury safari" style="position: absolute; left: 0px; top: 0px;">
                                     <figure>
-                                        <div class="gallery-img"><a href="#"><img src="/storage/ProductImg/{{$p->pic}}" alt=""></a></div>
+                                        <div class="gallery-img"><a href=""><img src="/storage/ProductImg/{{$p->pic}}" alt=""></a></div>
                                         <figcaption>
-                                            <h3><a href="#">{{$p->name}}</a></h3>
+                                            <h3><a href="/products/{{$p->name}}">{{$p->name}}</a></h3>
                                             <p>{{$p->description}}</p>
-                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex2" href="services.html">{{$p->name}}<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
+                                            <a class="text-small highlight-link text-uppercase bg-black white-text tex2" href="/products/{{$p->name}}">{{$p->name}}<i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
                                         </figcaption>
                                     </figure>
                                 </li>
-                                @endforeach
-                                <!-- end tour item -->
+                            </ul>
+</div>
 
+
+
+                                @endforeach
+                            </div>
+                        </div>
+                                <!-- end tour item -->
+                                <br><br><br><br><br>
+                                
         <section class="wow fadeIn animated" style="visibility: visible; animation-name: fadeIn;">
         @endforeach
         <br><br><br><br><br>
@@ -270,13 +280,14 @@ use App\Models\Dosing;
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                    
-                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link1" class="collapsed"><h4 class="panel-title">Filter by nutrient, application type and product range<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
+                                    <a data-toggle="collapse" data-parent="#accordion-one" href="#accordion-one-link1" class="collapsed"><h4 class="panel-title">Filter by Category<span class="pull-right"><i class="fa fa-plus"></i></span></h4></a>
                                 </div>
                                 <div id="accordion-one-link1" class="panel-collapse collapse" style="height: 0px;">
                                     <div class="row">
-                                        <form>
+                                        <form method="POST" action="/bycategory">
+                                            @csrf
                                             <div class="col-md-12 col-sm-10 center-col">
-                                                <div class="col-md-4 col-sm-4 xs-margin-bottom-five">
+                                                {{-- <div class="col-md-4 col-sm-4 xs-margin-bottom-five">
                                                     <h1 class="titell">Nutrient</h1>
                                                     <div class="radio">
                                                         <!-- radio button  -->
@@ -298,54 +309,18 @@ use App\Models\Dosing;
                                                         <label><input type="radio" id="optionsRadios4" name="optionsRadios" disabled=""> Disabled</label>
                                                         <!-- end radio button  -->
                                                     </div>
-                                                </div>
+                                                </div> --}}
                                                 <div class="col-md-4 col-sm-4 xs-margin-bottom-five">
-                                                    <h1 class="titell">Nutrient</h1>
+                                                    <h1 class="titell">plz select a category</h1>
+                                                    @foreach(Category::all() as $category)
                                                     <div class="checkbox">
                                                         <!-- checkbox  -->
-                                                        <label><input type="checkbox" name="optionsCheckbox"> Contemporary</label>
+                                                        <label><input type="checkbox" name="ids[]" value="{{$category->id}}"> {{$category->name}}</label>
                                                         <!-- end checkbox  -->
                                                     </div>
-                                                    <div class="checkbox">
-                                                        <!-- checkbox  -->
-                                                        <label><input type="checkbox" name="optionsCheckbox"> Plastic</label>
-                                                        <!-- end checkbox  -->
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <!-- checkbox  -->
-                                                        <label><input type="checkbox" name="optionsCheckbox"> Outdoor</label>
-                                                        <!-- end checkbox  -->
-                                                    </div>
-                                                    <div class="checkbox disabled">
-                                                        <!-- checkbox  -->
-                                                        <label><input type="checkbox" name="optionsCheckbox" disabled=""> Disabled</label>
-                                                        <!-- end checkbox  -->
-                                                    </div>
+                                                    @endforeach
                                                 </div>
-                                                <div class="col-md-4 col-sm-4 xs-margin-bottom-five">
-                                                    <h1 class="titell">Nutrient</h1>
-                                                    <div class="checkbox">
-                                                        <!-- checkbox  -->
-                                                        <label><input type="checkbox" name="optionsCheckbox"> Contemporary</label>
-                                                        <!-- end checkbox  -->
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <!-- checkbox  -->
-                                                        <label><input type="checkbox" name="optionsCheckbox"> Plastic</label>
-                                                        <!-- end checkbox  -->
-                                                    </div>
-                                                    <div class="checkbox">
-                                                        <!-- checkbox  -->
-                                                        <label><input type="checkbox" name="optionsCheckbox"> Outdoor</label>
-                                                        <!-- end checkbox  -->
-                                                    </div>
-                                                    <div class="checkbox disabled">
-                                                        <!-- checkbox  -->
-                                                        <label><input type="checkbox" name="optionsCheckbox" disabled=""> Disabled</label>
-                                                        <!-- end checkbox  -->
-                                                    </div>
-                                                </div>
-                                                <a class="text-small highlight-link text-uppercase bg-black white-text" href="services.html">Apply filters <i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a>
+                                                <button type="submit" style="background-color: unset; border:none"><a class="text-small highlight-link text-uppercase bg-black white-text" >Apply filters <i class="fa fa-long-arrow-right extra-small-icon white-text"></i></a></button>
                                             </div>
                                         </form>
                                     </div>

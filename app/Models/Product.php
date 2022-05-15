@@ -13,9 +13,21 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Dosing');
     }
+    public function characteristics()
+    {
+        return $this->hasMany('App\Models\Characteristic');
+    }
     public function category()
     {
         return $this->belongsTo('App\Models\Category');
+    }
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+    public function supplier()
+    {
+        return $this->belongsTo('App\Models\Supplier');
     }
     use HasFactory;
 }

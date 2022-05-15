@@ -13,30 +13,30 @@
         <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
         <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
         <!-- animation --> 
-        <link rel="stylesheet" href="css/animate.css" />
+        <link rel="stylesheet" href="/css/animate.css" />
         <!-- bootstrap --> 
-        <link rel="stylesheet" href="css/bootstrap.css" />
+        <link rel="stylesheet" href="/css/bootstrap.css" />
         <!-- et line icon --> 
-        <link rel="stylesheet" href="css/et-line-icons.css" />
+        <link rel="stylesheet" href="/css/et-line-icons.css" />
         <!-- font-awesome icon -->
-        <link rel="stylesheet" href="css/font-awesome.min.css" />
+        <link rel="stylesheet" href="/css/font-awesome.min.css" />
         <!-- revolution slider -->
-        <link rel="stylesheet" href="css/extralayers.css" />
-        <link rel="stylesheet" href="css/settings.css" />
+        <link rel="stylesheet" href="/css/extralayers.css" />
+        <link rel="stylesheet" href="/css/settings.css" />
         <!-- magnific popup -->
-        <link rel="stylesheet" href="css/magnific-popup.css" />
+        <link rel="stylesheet" href="/css/magnific-popup.css" />
         <!-- owl carousel -->
-        <link rel="stylesheet" href="css/owl.carousel.css" />
-        <link rel="stylesheet" href="css/owl.transitions.css" />
-        <link rel="stylesheet" href="css/full-slider.css" />
+        <link rel="stylesheet" href="/css/owl.carousel.css" />
+        <link rel="stylesheet" href="/css/owl.transitions.css" />
+        <link rel="stylesheet" href="/css/full-slider.css" />
         <!-- text animation -->
-        <link rel="stylesheet" href="css/text-effect.css" />
+        <link rel="stylesheet" href="/css/text-effect.css" />
         <!-- hamburger menu  -->
-        <link rel="stylesheet" href="css/menu-hamburger.css" />
+        <link rel="stylesheet" href="/css/menu-hamburger.css" />
         <!-- common -->
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="/css/style.css" />
         <!-- responsive -->
-        <link rel="stylesheet" href="css/responsive.css" />
+        <link rel="stylesheet" href="/css/responsive.css" />
         <!--[if IE]>
             <link rel="stylesheet" href="css/style-ie.css" />
         <![endif]-->
@@ -150,7 +150,7 @@
                         <div class="separator-line bg-yellow no-margin-top margin-four"></div>
                         <!-- page title -->
                         <h1 class="black-text">
-                            Products
+                            {{$product->name}}
                         </h1>
                         <!-- end page title -->
                         <!-- page title tagline -->
@@ -167,8 +167,8 @@
             <div class="container">
                 <div class="row">
                     <!-- product images -->
-                    <div class="col-md-6 col-sm-12 zoom-gallery sm-margin-bottom-ten">
-                        <a href="images/ff11.png"><img src="images/ff11.png" alt="" /></a>
+                    <div class="col-md-6 col-sm-5 zoom-gallery sm-margin-bottom-ten">
+                        <a href="/storage/ProductImg/{{$product->pic}}"><img src="/storage/ProductImg/{{$product->pic}}" alt="" /></a>
                         <!--<div class="products-thumb text-center">
                             <a href="images/image-222.jpg"><img src="images/image-222.jpg" alt="" /></a>
                             <a href="images/image-333.jpg"><img src="images/image-333.jpg" alt="" /></a>
@@ -187,12 +187,11 @@
     <p class="text-uppercase letter-spacing-2 margin-two">In Stock / Shipping Available</p>
     <div class="separator-line bg-black no-margin-lr margin-five"></div>-->
                         <p>
-                            Van Iperen Calcium Nitrate Horticultural Grade is a highly pure Calcium fertilizer which dissolves rapidly and completely. Our product has a limited caking sensitivity and is recommended as of early spring until fruit setting and fruit development. The high level of Calcium improves the strength of cell walls during active cell division stages. The presence of Nitrogen has a positive effect on the uptake of Calcium in the plant.
-
+                            {{$product->description}}
                         </p>
                         <!-- end product short description -->
                         <!-- <span class="price black-text title-small"><del>$750</del>$450</span>-->
-                        <div>
+                        {{-- <div>
 
                             <ul class="oppt">
                                 <li class="opptss">Improves fruit quality (less sensitive to bitter pit and blossom end rot) and shelf-life</li>
@@ -200,15 +199,15 @@
                             </ul>
 
                             <!-- end product size -->
-                        </div>
+                        </div> --}}
                         <div data-contact-for-post="2680" class="product-contact">
                             <div class="contact-person vcard" itemscope="" itemtype="http://schema.org/Person">
-                                <div class="person-thumb"><img class="photo" src="https://www.vaniperen.com/wp-content/uploads/2017/04/George-400px-100x100.jpg" alt="Photo Georges Chidiac" itemprop="image"></div>
+                                <div class="person-thumb"><img class="photo" src="/images/person.jpg" alt="Photo " itemprop="image"></div>
                                 <div class="person-contact">
-                                    <a class="email" href="mailto:georges@iperen.com" itemprop="email">georges@iperen.com</a>        <span class="telephone" itemprop="telephone">+96 131 327 09</span>
+                                    <a class="email" href="mailto:georges@iperen.com" itemprop="email">{{$product->supplier->email}}</a>        <span class="telephone" itemprop="telephone">{{$product->supplier->phone}}</span>
                                 </div>
                                 <div class="person-name">
-                                    <span class="fn small" itemprop="name">Georges Chidiac</span>        <span class="function small" itemprop="jobTitle">International Sales Manager based in Lebanon</span>
+                                    <span class="fn small" itemprop="name">{{$product->supplier->name}}</span>        <span class="function small" itemprop="jobTitle">{{$product->supplier->job}}</span>
                                 </div>
                             </div>
                         </div>
@@ -242,14 +241,13 @@
                                 <div class="tab-pane med-text fade in active" id="tab_sec1">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12">
-                                            <img src="images/1200x756.jpg" alt="Alternate Text" />
+                                            <img src="/storage/CategoryImg/{{$product->category->pic}}" alt="Alternate Text" />
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <ul class="dtls">
-                                                <li>Low on heavy metals</li>
-                                                <li>Low on Sodium and Chloride</li>
-                                                <li>Production process certified according to ISO 9001:2009</li>
-                                                <li>White granules</li>
+                                                @foreach($product->characteristics as $char)
+                                                <li>{{$char->description}}</li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -268,91 +266,32 @@
                                                 <table class="table shop-cart text-center">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Kg in 1.000 l stock solution</th>
-                                                            <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">CaO in kg	</th>
-                                                            <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Total N in kg	</th>
-                                                            <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">N-NO3 in kg	</th>
-                                                            <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">N-NH4 in kg</th>
+                                                            <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Crop</th>
+                                                            <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Application	Data</th>
+                                                            <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Min	</th>
+                                                            <th class="text-left text-uppercase font-weight-600 letter-spacing-2 text-small black-text">Max	</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @foreach($product->dosings as $dosing)
                                                         <tr>
                                                             <td class="product-thumbnail text-left">
-                                                                100
+                                                                <img src="/storage/DosingImg/{{$dosing->crop}}" style="width:120px;height:100px;">
                                                             </td>
                                                             <td class="text-left">
-                                                                26,3
+                                                                {{$dosing->application}}
 
                                                             </td>
                                                             <td class="product-quantity">
                                                                 <div class="checkbox">
-                                                                    <!-- checkbox  -->
-                                                                    15,5
-                                                                    <!-- end checkbox  -->
+                                                                    {{$dosing->min}}
                                                                 </div>
                                                             </td>
                                                             <td class="product-quantity">
-                                                                14,4
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                1,1
+                                                                {{$dosing->max}}
                                                             </td>
                                                         </tr>
-                                                        <tr>
-                                                            <td class="product-thumbnail text-left">
-                                                              150
-                                                            </td>
-                                                            <td class="text-left">
-                                                                39,4
-
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                23,2
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                21,6
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                1,6
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="product-thumbnail text-left">
-                                                               200
-                                                            </td>
-                                                            <td class="text-left">
-                                                                52,6
-
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                31,0
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                28,8
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                2,2
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="product-thumbnail text-left">
-                                                               250
-                                                            </td>
-                                                            <td class="text-left">
-                                                                65,7
-
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                38,7
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                36,0
-                                                            </td>
-                                                            <td class="product-quantity">
-                                                                2,7
-                                                            </td>
-                                                        </tr>
-
+                                                        @endforeach
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -460,7 +399,14 @@
                                 <div class="tab-pane fade in" id="tab_sec4">
                                     <div class="row">
                                         <div class="col-md-6 col-sm-12 review-main">
-                                            <p>Compatible with other fertilizers, with the exception of Sulphate or Phosphate fertilizers. Therefore a separate tank is needed or fertilizers should be applied at different times. </p>
+                                            <p>
+                                                @if($product->quantity>0)
+                                                Available
+                                                @else
+                                                Not Available
+                                                @endif                                             
+                                            
+                                            </p>
                                         </div>
                                         <div class="col-md-5 col-sm-12 col-md-offset-1 blog-single-full-width-form sm-margin-top-seven">
                                             <div class="blog-comment-form">
